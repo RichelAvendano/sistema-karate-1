@@ -1,0 +1,39 @@
+.file-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+    width: 220px; /* ✅ Tamaño más compacto */
+}
+
+.file-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: linear-gradient(to right, #ff4500, #007bff); /* ✅ Colores más vibrantes */
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    justify-content: space-between;
+}
+
+.file-label:hover {
+    background: linear-gradient(to right, #d43f00, #006ad4);
+    transform: scale(1.04);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.file-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    word-wrap: break-word; /* ✅ Permite que las palabras largas se rompan */
+    overflow: hidden; /* ✅ Evita que el contenido desborde */
+}

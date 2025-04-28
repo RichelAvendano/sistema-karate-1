@@ -8,8 +8,8 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
+        @vite(['resources/css/bootstrap.css'])
+ 
     </head>
     <body class="font-sans antialiased">
 
@@ -21,7 +21,7 @@
         </main>
 
         @include('layouts.home.footer')
-
-        <script src="{{ asset('fontawesome/js/all.min.js') }}"></script>
+        
+        @vite(['resources/js/app.js'])
     </body>
 </html>

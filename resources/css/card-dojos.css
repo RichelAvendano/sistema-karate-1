@@ -1,0 +1,295 @@
+:root {
+    --red-primary: #d90429;
+    --red-secondary: #ff2d4d;
+    --blue-primary: #023047;
+    --blue-secondary: #219ebc;
+    --glass-intensity: blur(10px);
+    --transition-speed: 0.4s;
+}
+
+/* Estructura principal */
+.dojo-card-ultimate {
+    display: flex;
+    width: 100%;
+    max-width: 465px;
+    min-height: 220px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(2, 48, 71, 0.25);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: var(--glass-intensity);
+    -webkit-backdrop-filter: var(--glass-intensity);
+    transition: all var(--transition-speed) ease;
+    margin: 0px auto;
+    position: relative;
+}
+
+/* Sección de imagen */
+.dojo-image-container-ultimate {
+    width: 35%;
+    min-width: 200px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(239, 35, 60, 0.15) 0%, rgba(2, 48, 71, 0.25) 100%);
+}
+
+.dojo-image-ultimate {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #041465;
+    box-shadow: 0 0 5px 5px rgba(28, 46, 146, 0.185);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    position: relative;
+    z-index: 2;
+}
+
+/* Sección de contenido */
+.dojo-content-ultimate {
+    width: 65%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, rgba(255, 177, 186, 0.15) 0%, rgba(203, 238, 255, 0.25) 100%);
+}
+
+.dojo-text-content {
+    margin-bottom: 20px;
+}
+
+/* Estilos de texto */
+.dojo-title-ultimate {
+    color: var(--blue-primary);
+    margin-top: 0;
+    font-weight: 800;
+    position: relative;
+}
+
+.dojo-desc-ultimate {
+    color: var(--blue-secondary);
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.dojo-location-ultimate {
+    display: flex;
+    align-items: center;
+    color: var(--blue-primary);
+    font-weight: 700;
+}
+
+.dojo-location-ultimate svg {
+    margin-right: 10px;
+    color: var(--red-primary);
+}
+
+/* Botones de acción */
+.dojo-actions-ultimate {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.edit-btn-ultimate, .delete-btn-ultimate, .new-btn-ultimate, .cancel-btn-ultimate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+.cancel-btn-ultimate{
+    background: linear-gradient(135deg, #a3a8a4, #171817);
+    color: white;
+}
+
+.edit-btn-ultimate {
+    background: linear-gradient(135deg, var(--blue-secondary), var(--blue-primary));
+    color: white;
+}
+
+.edit-btn-ultimate.active {
+    background: linear-gradient(135deg, #219ebca6, #0230474d);
+}
+
+.delete-btn-ultimate {
+    background: linear-gradient(135deg, var(--red-secondary), #b70a28);
+    color: white;
+}
+
+.new-btn-ultimate{
+    background: linear-gradient(135deg, #4c87544f, #52b944f0);
+    color: #051d5f;
+    backdrop-filter: blur(15px);
+}
+
+/* Efectos hover */
+.dojo-card-ultimate:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(217, 4, 41, 0.3);
+    background: linear-gradient(135deg, rgba(243, 198, 204, 0.418) 0%, rgba(212, 241, 255, 0.418) 100%)
+}
+
+.dojo-card-ultimate:hover .dojo-image-ultimate {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.dojo-image-ultimate img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.dojo-card-ultimate:hover .dojo-image-ultimate img {
+    transform: scale(1.1);
+}
+
+.cancel-btn-ultimate:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(80, 83, 81, 0.4);
+}
+
+.new-btn-ultimate:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(33, 188, 59, 0.4);
+}
+
+.edit-btn-ultimate:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(33, 158, 188, 0.4);
+}
+
+.delete-btn-ultimate:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(217, 4, 41, 0.4);
+}
+
+/* Efecto de fondo glass */
+
+
+.edit-btn-ultimate:active, .delete-btn-ultimate:active, .new-btn-ultimate:active, .cancel-btn-ultimate:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.edit-btn-ultimate i, .delete-btn-ultimate i, .new-btn-ultimate i, .cancel-btn-ultimate i {
+    transition: transform 0.3s ease;
+    font-size: 15px;
+}
+
+.edit-btn-ultimate:hover i {
+    transform: rotate(-10deg) scale(1.1);
+}
+
+.delete-btn-ultimate:hover i {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.new-btn-ultimate:hover i{
+    transform: rotate(10deg) scale(1.1);
+}
+
+.cancel-btn-ultimate:hover i {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Versión móvil (vertical) */
+@media (max-width: 550px) {
+    .dojo-card-ultimate {
+        flex-direction: column;
+        max-width: 320px;
+        min-height: auto;
+    }
+    
+    .dojo-image-container-ultimate {
+        width: 100%;
+        height: 180px;
+        min-width: auto;
+    }
+    
+    .dojo-content-ultimate {
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .dojo-image-ultimate {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .dojo-title-ultimate {
+        text-align: center;
+    }
+    
+    .dojo-desc-ultimate {
+        text-align: center;
+    }
+    
+    .dojo-location-ultimate {
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    
+    .dojo-actions-ultimate {
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: -20px;
+    }
+    
+    .edit-btn-ultimate, .delete-btn-ultimate {
+        padding: 8px 16px;
+    }
+}
+
+/* Versión tablet (ajustes menores) */
+@media (min-width: 550px) and (max-width: 768px) {
+    .dojo-card-ultimate {
+        max-width: 500px;
+    }
+    
+    .dojo-image-ultimate {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .dojo-content-ultimate {
+        padding: 20px;
+    }
+    
+    .dojo-title-ultimate {
+        text-align: center;
+    }
+    
+    .dojo-desc-ultimate {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .dojo-location-ultimate{
+        justify-content: center;
+    }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); /* Ajuste automático */
+    justify-content: center; /* ✅ Centra los elementos horizontalmente */
+    gap: 20px; /* Espaciado entre los elementos */
+    max-width: 1500px; /* Limita el ancho máximo */
+    margin: auto; /* Centra el grid en su contenedor */
+}

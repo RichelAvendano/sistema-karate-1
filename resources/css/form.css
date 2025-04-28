@@ -1,0 +1,231 @@
+/* Estilo para el contenedor del input de archivo */
+.modern-file-input-container {
+    min-height:145px;
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 1rem; /* Espacio interno */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:column; /* Icono/preview arriba, nombre y botón abajo */
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacio entre elementos */
+    background-color: #3390ed0f; /* Fondo ligero */
+    margin-top: 10px;
+}
+
+/* Estilo para la etiqueta que simula el botón de subir archivo */
+.modern-file-label {
+    display: inline-flex; /* Permite icono y texto en línea */
+    align-items: center;
+    padding: 0.5rem 1rem; /* Padding */
+    background-color: #007bff; /* Fondo azul */
+    color: white; /* Texto blanco */
+    border-radius: 0.25rem; /* Bordes redondeados */
+    cursor: pointer; /* Indica que es clickeable */
+    transition: background-color 0.2s ease-in-out;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.modern-file-label:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+}
+
+.modern-file-label i {
+    margin-right: 8px; /* Espacio entre icono y texto */
+}
+
+/* Estilo para la previsualización de imagen */
+.modern-image-preview {
+    max-width: 100%; /* No exceder el ancho del contenedor */
+    max-height: 120px; /* Altura máxima */
+    border-radius: 0.25rem; /* Bordes redondeados */
+    margin-bottom: 10px; /* Espacio debajo de la imagen */
+    box-shadow: 0 4px 30px rgb(155 61 61 / 29%);
+    border-radius: 20px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.close-btn-image {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #6d9ddd;
+    font-size: 45px;
+    transition: all 0.4s;
+}
+
+.close-btn-image:hover{
+    color: #ec3131;
+}
+
+.modern-image-container{
+    transition: all 0.5s;
+}
+
+.modern-image-container:hover img{
+    filter: blur(3px);
+}
+
+.modern-image-container:hover .image-overlay-text{
+    opacity: 1;
+}
+
+.image-overlay-text {
+    position: absolute; /* Posicionamiento absoluto con respecto a .image-hover-effect-container */
+    top: 45%; /* Centrado vertical */
+    left: 50%; /* Centrado horizontal */
+    transform: translate(-50%, -55%); /* Ajuste final para centrarlo exactamente */
+    z-index: 10; /* Asegura que esté por encima de la imagen */
+    color: #094760; /* Color del texto */
+    font-size: 5rem; /* Tamaño del texto */
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para que se vea sobre la imagen */
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease-in-out; /* Transición suave para la aparición del texto */
+    pointer-events: none; /* Permite que los clics pasen a través del texto hacia la imagen subyacente */
+}     
+
+.modern-btn-success{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-btn-success {
+    background: linear-gradient(135deg, var(--blue-secondary), var(--blue-primary));
+    color: white;
+}
+
+.modern-btn-success:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(33, 158, 188, 0.4);
+}
+.modern-btn-success:active{
+    transform: translateY(1px) scale(0.98);
+}
+.modern-btn-success i{
+    transition: transform 0.3s ease;
+    font-size: 15px;
+}
+.modern-btn-success:hover i {
+    transform: rotate(-10deg) scale(1.1);
+}
+
+/* Estilo para el span que muestra el nombre del archivo */
+.modern-file-name {
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.modern-container-header{
+    display:flex; 
+    justify-content:center;
+    margin-top:10px;
+}
+
+.modern-header{
+    max-width:700px;
+    padding:10px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(135deg, #219ebc66, #0230471f);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modern-header-tab{
+    background: linear-gradient(135deg, #219dbc83, #023047b0);
+    border-radius:0;
+    border: none;
+    height: 45px;
+}
+
+.modern-header-tab.active{
+    background: linear-gradient(135deg, var(--blue-secondary), var(--blue-primary));
+}
+
+.modern-header-tab:hover{
+    background: linear-gradient(135deg, var(--blue-secondary), var(--blue-primary));
+}
+
+.modern-header-tab:active{
+    transform: translateY(1px) scale(0.98);
+}
+@media (max-width: 500px) {
+
+    .modern-container-header-responsive{
+        justify-content: space-evenly !important;
+        gap: 20px;
+    }
+
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #000000;
+    background-color: #dfe4f375;
+    background-image: none;
+    /* border:1px solid #ccc; */
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
+    height: 33px;
+    font-size: 13px;
+    border-radius: 3px;
+    box-shadow: none;
+    border: 1px solid rgb(0 0 0 / 0%);
+    transition-duration: .5s;
+}
+
+.label-form {
+    font-weight: 700;
+    border-left: 5px solid #136d88;
+    margin-left: 2px;
+    padding-left: 5px;
+}
+
+.alert-error{
+    background: linear-gradient(135deg, #e70022, #ff2248);
+    padding: 5px;
+    color: #ffffff;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.color-title{
+    font-weight: 700;
+    color: #051d5f;
+    font-size: 2.5rem;
+}
+
+.color-paragraph{
+    color: #01154d;
+    font-size: 1.5rem
+}

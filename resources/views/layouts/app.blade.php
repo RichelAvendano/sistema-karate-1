@@ -14,10 +14,22 @@
 
         <!--Nifty Premium Icon [ DEMONSTRATION ]-->
         <link href="{{asset('css\nifty-demo-icons.min.css')}}" rel="stylesheet">
-        <!-- Scripts -->
-        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
+        <!--Animate.css [ OPTIONAL ]-->
+        <link href="{{asset('css/animate.min.css')}}" rel="stylesheet">
+
+        <!-- Estilos -->
+        @vite(['resources/css/app.css'])
+        @vite(['resources/css/modal.css'])
+
+        @vite(['resources/css/card-dojos.css'])
+        @vite(['resources/css/file-input.css'])
+        @vite(['resources/css/panel-glass.css'])
+        @vite(['resources/css/form.css'])
+        @vite(['resources/css/table.css'])
+        @vite(['resources/css/select.css'])
         
+        @stack('styles')      
     </head>
     <body class="font-sans">
 
@@ -43,8 +55,11 @@
             </button>
         </div>
 
-        <script src="{{asset('js\jquery.min.js')}}"></script>
+        <script src="{{asset('js\jquery.min.js')}}"></script>    
         <script src="{{asset('js\nifty.min.js')}}"></script>
         <script src="{{asset('js\bootstrap.min.js')}}"></script>
+        <script src="{{asset('js\demo\ui-modals.js')}}"></script>
+
+        @stack('scripts')  
     </body>
 </html>

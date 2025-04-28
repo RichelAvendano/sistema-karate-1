@@ -1,0 +1,74 @@
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 100000;
+    opacity: 1;
+    visibility: visible;
+    backdrop-filter: blur(1px);
+}
+
+.modal-overlay::before {
+    content: ''; /* Necesario para mostrar el pseudo-elemento */
+    position: absolute; /* Posicionamiento absoluto con respecto al padre */
+    background-color: rgb(28 70 181 / 32%); /* Color negro con 50% de opacidad (ajústala) */
+    filter: blur(200px);
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%; /* Asegura que cubra todo el ancho */
+    height: 100%; /* Asegura que cubra toda la altura */
+    z-index: -1;
+}
+
+.modal-container {
+    background: linear-gradient(135deg, #f1f8ff, #fff1f1);
+    width: 100%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(0.8);
+    transition: transform 0.3s ease-in-out;
+    margin: 15px
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: -6px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #000000;
+    font-size: 35px;
+    transition: all 0.4s;
+}
+
+.close-btn:hover {
+    color: rgb(240, 43, 8);
+}
+
+/* Formulario */
+.form-group {
+    margin: 15px 0;
+}
+
+/* Botones */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}

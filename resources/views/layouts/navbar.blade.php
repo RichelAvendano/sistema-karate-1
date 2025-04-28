@@ -34,7 +34,7 @@
 
                 <!--Search-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                <li>
+                {{-- <li>
                     <div class="custom-search-form">
                         <label class="btn btn-trans" for="search-input" data-toggle="collapse" data-target="#nav-searchbox">
                             <i class="demo-pli-magnifi-glass"></i>
@@ -45,7 +45,7 @@
                             </div>
                         </form>
                     </div>
-                </li>
+                </li> --}}
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <!--End Search-->
 
@@ -115,38 +115,10 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="media" href="#">
-                                            <div class="media-left">
-                                                <img class="img-circle img-sm" alt="Profile Picture" src="img\profile-photos\9.png">
-                                            </div>
-                                            <div class="media-body">
-                                                <p class="mar-no text-nowrap text-main text-semibold">Lucy sent you a message</p>
-                                                <small>30 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="media" href="#">
-                                            <div class="media-left">
-                                                <img class="img-circle img-sm" alt="Profile Picture" src="img\profile-photos\3.png">
-                                            </div>
-                                            <div class="media-body">
-                                                <p class="mar-no text-nowrap text-main text-semibold">Jackson sent you a message</p>
-                                                <small>40 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!--Dropdown footer-->
-                        <div class="pad-all bord-top">
-                            <a href="#" class="btn-link text-main box-block">
-                                <i class="pci-chevron chevron-right pull-right"></i>Show All Notifications
-                            </a>
-                        </div>
                     </div>
                 </li>
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -174,18 +146,12 @@
                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
                         <ul class="head-list">
                             <li>
-                                <a href="{{route('profile.edit')}}"><i class="demo-pli-male icon-lg icon-fw"></i> Profile</a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="badge badge-danger pull-right">9</span><i class="demo-pli-mail icon-lg icon-fw"></i> Messages</a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="label label-success pull-right">New</span><i class="demo-pli-gear icon-lg icon-fw"></i> Settings</a>
+                                <a href="{{route('profile.edit')}}" wire:navigate><i class="demo-pli-male icon-lg icon-fw"></i>Perfil</a>
                             </li>
                             <li style="cursor: pointer;">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <a :href="route('logout')"
+                                    <a wire:navigate 
                                         onclick="event.preventDefault(); this.closest('form').submit();"><i class="demo-pli-unlock icon-lg icon-fw"></i>
                                         {{ __('Cerrar Sesión') }}
                                     </a>

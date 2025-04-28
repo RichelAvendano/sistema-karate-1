@@ -9,17 +9,17 @@
                             @csrf
     
                             <div class="mb-3">
-                                <label for="name" class="form-label">{{ __('Nombre') }}</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required autofocus autocomplete="name" placeholder="{{ __('Ingresa tu nombre') }}">
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-    
-                            <div class="mb-3">
                                 <label for="email" class="form-label">{{ __('Correo Electrónico') }}</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="username" placeholder="{{ __('Ingresa tu correo electrónico') }}">
                                 @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="role" class="form-label">{{ __('Rol') }}</label>
+                                <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" role="role" value="{{ old('role') }}" name="role" required autofocus autocomplete="role" placeholder="{{ __('Ingresa tu nombre') }}">
+                                @error('role')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

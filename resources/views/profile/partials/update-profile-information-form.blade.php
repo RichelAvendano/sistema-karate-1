@@ -4,10 +4,12 @@
         <p class="card-subtitle text-muted">{{ __("Actualiza la información del perfil y la dirección de correo electrónico de tu cuenta.") }}</p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    {{-- <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
-    </form>
-
+    </form> --}}
+    @if (session('status') === 'profile-updated')
+        <div class="alert alert-success">Los Datos han sido Cambiado con Exito</div>
+    @endif
     <form method="post" action="{{ route('profile.update') }}" class="mt-3">
         @csrf
         @method('patch')
@@ -57,15 +59,7 @@
         <div class="panel-footer">
             <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
 
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="form-text text-muted"
-                >{{ __('Guardado.') }}</p>
-            @endif
+            
         </div>
     </form>
 </section>
