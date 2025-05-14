@@ -18,5 +18,20 @@ class Dojo extends Model
     {
         return $this->hasOne(Sensei::class);
     }
+
+    public function student()
+    {
+        return $this->hasMany(Student::class);
+    }
+
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class , 'dojo_id', 'id'); // ✅ Relación correcta
+    }
+
+    public function event()
+    {
+        return $this->belongsToMany(Event::class, 'dojo_event');
+    }
 }
 

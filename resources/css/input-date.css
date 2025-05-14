@@ -1,0 +1,191 @@
+
+:root {
+    --glass-blue-light: rgba(173, 216, 230, 0.4);
+    --glass-blue-dark: rgba(100, 149, 237, 0.7);
+    --glass-red-light: rgba(255, 182, 193, 0.4);
+    --glass-red-dark: rgba(219, 112, 147, 0.7);
+    --glass-white: rgba(255, 255, 255, 0.3);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    --glass-blur: blur(10px);
+}
+
+.date-input {
+    width: 100%;
+    padding: 7px;
+    background: linear-gradient(135deg, var(--glass-blue-light), var(--glass-red-light));
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 10px;
+    box-shadow: var(--glass-shadow);
+    color: #333;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.date-input:hover {
+    background: linear-gradient(135deg, var(--glass-blue-dark), var(--glass-red-dark));
+    color: white;
+}
+
+.calendar-container {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    max-width: 380px;
+    background: linear-gradient(135deg, var(--glass-blue-light), var(--glass-red-light));
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 10px;
+    box-shadow: var(--glass-shadow);
+    z-index: 100;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+    font-size: 16px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: linear-gradient(to right, var(--glass-blue-dark), var(--glass-red-dark));
+    color: white;
+}
+
+.month-year {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.month-year select {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 5px;
+    padding: 3px 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.month-year select option {
+    background: var(--glass-blue-dark);
+    color: white;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-button {
+    background: var(--glass-white);
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px 0;
+    background: rgba(255, 255, 255, 0.2);
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.8em;
+    color: #333;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    padding: 10px;
+}
+
+.day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.77);
+    color: #333;
+    font-size: 0.9em;
+}
+
+.day:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.day.today {
+    background: linear-gradient(to bottom right, rgb(100 149 237 / 32%), rgb(219 112 147 / 42%));
+    color: white;
+    font-weight: bold;
+}
+
+.day.selected {
+    background: linear-gradient(to bottom right, var(--glass-blue-dark), var(--glass-red-dark));
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(100, 149, 237, 0.5);
+    transform: scale(1.1);
+}
+
+.day.other-month {
+    opacity: 0.4;
+}
+
+.calendar-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-top: var(--glass-border);
+}
+
+.today-button, .clear-button {
+    background: linear-gradient(to right, var(--glass-blue-dark), var(--glass-red-dark));
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8em;
+}
+
+.today-button:hover, .clear-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.hidden-input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}

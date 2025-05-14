@@ -15,9 +15,7 @@
             <div id="page-content">
                 
                 <div class="row">
-                    <div class="col-lg-12">
-            
-                        
+                    <div class="col-lg-12">            
                         @livewire('super-admin.form')
                     </div>
                 </div>				

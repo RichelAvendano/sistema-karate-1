@@ -119,6 +119,7 @@
 </style>
 @endpush
 
+
 <div class="modern-pagination">
     @if ($paginator->hasPages())
         <div class="pagination-container">
@@ -191,7 +192,8 @@
                                     </span>
                                 @else
                                     <button class="page-number" 
-                                            wire:click.prevent="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')">
+                                            wire:click.prevent="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
+                                            wire:loading.attr="disabled">
                                         {{ $page }}
                                     </button>
                                 @endif

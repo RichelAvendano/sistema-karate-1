@@ -16,9 +16,13 @@ export default defineConfig({
                 'resources/css/form.css',
                 'resources/css/table.css',
                 'resources/css/select.css',
+                'resources/css/input-date.css',
+                'resources/css/event-card.css',
                 //js 
                 'resources/js/app.js',
                 'resources/js/alpine.js',
+                'resources/js/chart.js',
+                'resources/js/bootstrap.js'
                 
             ],
             refresh: true,

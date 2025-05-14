@@ -3,6 +3,8 @@
 namespace App\Livewire\Dojos;
 
 use App\Models\Dojo;
+use App\Models\Sensei;
+use App\Models\Student;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Attributes\On; // ¡Importa este atributo!
@@ -23,12 +25,12 @@ class FormAdd extends Component
     public $options = [
         [
             'value' => 'Name',
-            'title' => 'Name',
+            'title' => 'Nombre',
             'icon' => 'fa-solid fa-vihara'
         ],
         [
             'value' => 'Location',
-            'title' => 'Location',
+            'title' => 'Ubicacion',
             'icon' => 'fa-solid fa-location-dot'
         ],
     ];
@@ -66,12 +68,21 @@ class FormAdd extends Component
     }
 
     public function save(){
-        $this->validate([
-            'name' => 'required|string|max:255|unique:dojos,name',
-            'description' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'photo' => 'nullable|image'
-        ]);
+        $this->validate(
+            [
+                'name' => 'required|string|max:255|unique:dojos,name',
+                'description' => 'required|string|max:255',
+                'location' => 'required|string|max:255',
+                'photoSave' => 'required|image'
+            ],
+            attributes: [
+                'name' => 'nombre del dojo',
+                'description' => 'descripción',
+                'location' => 'ubicación',
+                'photoSave' => 'foto del dojo',
+            ]
+        );
+
 
         $dojo = Dojo::create([
             'name' => $this->name,
@@ -173,12 +184,22 @@ class FormAdd extends Component
 
     public function editSave($id)
     {
-        $this->validate([
-            'nameEdit' => 'required|string|max:255|unique:dojos,name,' . $id, // Permite actualizar el mismo registro
-            'descriptionEdit' => 'required|string|max:255',
-            'locationEdit' => 'required|string|max:255',
-            'photo' => 'nullable|image'
-        ]);
+        $this->validate(
+            [
+                'nameEdit' => 'required|string|max:255|unique:dojos,name,' . $id, // Permite actualizar el mismo registro
+                'descriptionEdit' => 'required|string|max:255',
+                'locationEdit' => 'required|string|max:255',
+                'photo' => 'required|image'
+            ],
+            attributes: [
+                'nameEdit' => 'nombre del dojo',
+                'descriptionEdit' => 'descripción',
+                'locationEdit' => 'ubicación',
+                'photo' => 'foto del dojo',
+            ]
+        );
+
+        
 
         $dojo = Dojo::find($id); // Usa el parámetro de la función en lugar de $this->id_selected
         $dojo->update([
@@ -245,18 +266,25 @@ class FormAdd extends Component
     {
         $dojo = Dojo::find($id);
 
-        $imagePath = $dojo->photo; // <<< Usamos $dojo->photo aquí
+        if ($dojo) {
+            // ✅ Buscar el sensei asociado al dojo
+            $sensei = Sensei::where('dojo_id', $id)->first(); 
+            
+            // ✅ Si hay sensei, quitar relación con estudiantes
+            if ($sensei) {
+                Student::where('sensei_id', $sensei->id)->update(['sensei_id' => null, 'status' => 'inactivo']); // ✅ Ahora sí podemos acceder a $sensei->id
+                $sensei->update(['dojo_id' => null, 'status' => 'inactivo']); // ✅ También desvincular sensei del dojo
+            }
 
-            // 3. Eliminar el archivo de la imagen del disco 'public'
-            //    Asumimos que la imagen se guardó en el disco 'public'.
-            //    Si store() sin disco especificado guarda en 'local',
-            //    necesitarías Storage::disk('local')->delete($imagePath);
-        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-            Storage::disk('public')->delete($imagePath);
-                // Opcional: Puedes añadir manejo de errores si la eliminación falla
+            // ✅ Finalmente eliminar el dojo
+            $dojo->delete();
         }
 
-        $dojo->delete();
+        $imagePath = $dojo->photo;
+
+        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('public')->delete($imagePath);
+        }
 
         $this->message = 'Dojo Eliminado Exitosamente';
         $this->destroyMessage = false;
@@ -327,6 +355,7 @@ class FormAdd extends Component
     public function render()
     {
         $dojos = Dojo::query()
+            ->with('sensei')
             ->when($this->search, function ($query) {
                 return $query->where(function ($q) {
                     $q->where($this->selectedValue, 'like', '%'.$this->search.'%');
@@ -334,7 +363,7 @@ class FormAdd extends Component
                 });
             })
             ->orderBy($this->sortBy, $this->sortDirection)
-            ->paginate(2);
+            ->paginate(4);
 
         return view('livewire.dojos.form-add', [
             'dojos' => $dojos

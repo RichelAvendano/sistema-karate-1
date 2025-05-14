@@ -1,3 +1,5 @@
+
+
 <nav id="mainnav-container">
     <div id="mainnav">
 
@@ -33,7 +35,9 @@
                                 <span class="pull-right dropdown-toggle">
                                     <i class="dropdown-caret"></i>
                                 </span>
-                                <p class="mnp-name">{{ Auth::user()->name }}</p>
+                                <p class="mnp-name"></p>
+
+                                
                                 <span class="mnp-desc">{{ Auth::user()->email }}</span>
                             </a>
                         </div>
@@ -57,7 +61,7 @@
             
                         <!--Menu list item-->
                         <li class="{{request()->routeIs('dashboard') ? 'modern-header' : 'modern-header-desactive'}}">
-                            <a href="{{route('dashboard')}}" wire:navigate style="cursor: pointer;">
+                            <a href="{{route('dashboard')}}" style="cursor: pointer;">
                                 <i class="fa-solid fa-table-columns"></i>
                                 <span class="menu-title">Panel</span>
                             </a>
@@ -69,19 +73,19 @@
                             </a>
                         </li>
                         <li class="{{request()->routeIs('super-admin') ? 'modern-header' : 'modern-header-desactive'}}">
-                            <a href="{{route('super-admin')}}" wire:navigate style="cursor: pointer;">
+                            <a href="{{route('super-admin')}}" style="cursor: pointer;">
                                 <i class="fa-solid fa-user-tie"></i>
                                 <span class="menu-title">Administrador</span>
                             </a>
                         </li>
                         <li class="{{request()->routeIs('dojos') ? 'modern-header' : 'modern-header-desactive'}}">
-                            <a href="{{route('dojos')}}" wire:navigate style="cursor: pointer;">
+                            <a href="{{route('dojos')}}" style="cursor: pointer;">
                                 <i class="fa-solid fa-vihara"></i>
                                 <span class="menu-title">Dojos</span>
                             </a>
                         </li>
                         <li class="{{request()->routeIs('senseis') ? 'modern-header' : 'modern-header-desactive'}}">
-                            <a href="{{route('senseis')}}" wire:navigate style="cursor: pointer;">
+                            <a href="{{route('senseis')}}" style="cursor: pointer;">
                                 <i class="fa-solid fa-user-ninja"></i>
                                 <span class="menu-title">Senseis</span>
                             </a>

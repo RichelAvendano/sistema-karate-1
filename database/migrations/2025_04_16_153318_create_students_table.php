@@ -18,10 +18,10 @@ return new class extends Migration
             $table->date('date_of_birth');
             $table->string('organization')->nullable();
             $table->string('photo')->nullable();
-            $table->foreignId('sensei_id')->constrained()->cascadeOnDelete(); // Un estudiante pertenece a UN sensei
+            $table->enum('status', ['activo', 'inactivo'])->default('activo');
+            $table->foreignId('sensei_id')->nullable()->constrained()->onDelete('set null'); // Un estudiante pertenece a UN sensei
+            $table->foreignId('dojo_id')->nullable()->constrained()->onDelete('set null'); // Un estudiante pertenece a UN dojo
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->softDeletes();
-            $table->timestamps();
         });                
     }
 

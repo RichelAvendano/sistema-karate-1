@@ -1,8 +1,7 @@
 .table-container {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     max-width: 100%;
-    margin: 1.5rem auto;
-    padding: 1rem;
+    overflow: auto;
 }
 
 .table-controls {

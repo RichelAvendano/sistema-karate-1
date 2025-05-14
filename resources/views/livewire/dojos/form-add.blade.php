@@ -1,177 +1,4 @@
-<div>
-
-    <!-- Modal para Nuevo Dojo y Header -->
-    <div x-data="{open: false}">
-        <div class="modern-container-header modern-container-header-responsive"
-            style='justify-content:space-between;flex-wrap:wrap;margin-top:0px; margin-bottom:10px'>
-            <div class="modern-header" style="padding:3px;">
-                <span class="text-center color-title">{{ __('Dojos') }}</span>
-                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                <!--End page title-->
-
-
-                <!--Breadcrumb-->
-                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                <ol class="breadcrumb">
-                    <li style='font-size:20px'>
-                        <a href="{{ route('dashboard') }}">
-                            <i class="fa-solid fa-home"></i>
-                        </a>
-                    </li>
-                    <li class="active" style='font-size:17px'>Dojo</li>
-                </ol>
-            </div>
-            <button @click="open = !open" class="new-btn-ultimate new-btn-responsive" style="font-size:22px; height: 60px; margin: auto 0">
-
-                <i x-show="!open" class="fa-solid fa-plus" style="font-size:25px"></i>
-                <i x-show="open" class="fa-solid fa-xmark" style="font-size:25px"></i>
-                
-                <span x-text="open ? 'Cerrar' : 'Nuevo Dojo'"></span>
-            </button>
-        </div>
-
-        <!-- Modal para Nuevo Dojo -->
-
-        <div x-show="open" x-transition.duration.500ms>
-            <div class="panel-custom">
-                <div class="modern-container-header">
-                    <div class="modern-header">
-                        <span class="text-center color-title">{{ __('Nuevo Dojo') }}</span>
-                        <span class="text-center color-paragraph"
-                            style="margin:0px;">{{ __('Agrega un Nuevo Dojo al sistema') }}</span>
-                    </div>
-                </div>
-
-                <!--Icons Addons-->
-                <!--===================================================-->
-                <form wire:submit='save' wire:key="dojo-form-save">
-                    <div class="panel-body" style="padding-top: 0">
-                        <div class="row">
-                            <!-- Nombre del Dojo -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-
-                                    <label class="control-label color-paragraph label-form" for="name"
-                                        style="@error('name') color:#e90326; @enderror">Nombre del Dojo</label>
-                                    <div class="input-group mar-btm">
-                                        <label class="input-group-addon" for="name"><i
-                                                class="fa-solid fa-user"></i></label>
-                                        <input type="text" class="form-control" id="name" wire:model.live='name'
-                                            placeholder="Ingrese el nombre" autocomplete="off" required>
-                                    </div>
-                                    @error('name')
-                                        <div class="alert-error animated shake">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <!-- Ubicación del Dojo -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="control-label color-paragraph label-form" for="location"
-                                        style="@error('location') color:#e90326; @enderror">Ubicación del Dojo</label>
-                                    <div class="input-group mar-btm">
-                                        <label class="input-group-addon" for="location"><i
-                                                class="fa-solid fa-location-dot"></i></label>
-                                        <input type="text" class="form-control" id="location" wire:model.live='location'
-                                            placeholder="Ingrese la ubicación" autocomplete="off" required>
-                                    </div>
-                                    @error('location')
-                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <!-- Descripción -->
-                            <div class="col-sm-6">
-                                <div class="form-group" style="margin-top:0">
-                                    <label class="control-label color-paragraph label-form" for="description"
-                                        style="@error('description') color:#e90326; @enderror">Breve Descripción</label>
-                                    <div class="input-group mar-btm">
-                                        <label class="input-group-addon" for="description"><i
-                                                class="fa-solid fa-pen-to-square"></i></label>
-                                        <textarea class="form-control" id="description" wire:model.live='description'
-                                            placeholder="Ingrese una breve descripción" style="height: 170px; overflow-y: auto; resize: none;" required></textarea>
-                                    </div>
-                                    @error('description')
-                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- foto --}}
-                            <div class="col-sm-6">
-                                <div class="form-group" style="margin-top:0">
-                                    <label class="control-label color-paragraph label-form" for="file-upload-save">Agrega
-                                        una Imagen</label>
-                                    <div class="modern-file-input-container"> {{-- Contenedor para el input de archivo --}}
-
-                                        @if ($photoSave)
-                                            <button class="close-btn-image" type="button" wire:click="removePhotoSave"><i
-                                                    class="fa-solid fa-trash" style="font-size: 18px"></i></button>
-                                            {{-- La previsualización de imagen --}}
-                                            {{-- Asegúrate de tener un public property $photoSave y usar Livewire\Features\SupportFileUploads\WithFileUploads --}}
-                                            {{-- Y si guardas la imagen, ajusta la URL src --}}
-                                            @if (is_a($photoSave, \Livewire\Features\SupportFileUploads\TemporaryUploadedFile::class))
-                                                <div class="modern-image-container">
-                                                    <img id="image-preview" class="modern-image-preview"
-                                                        src="{{ $photoSave->temporaryUrl() }}" alt="Imagen seleccionada"
-                                                        wire:click='viewImage'>
-                                                    <div class="image-overlay-text">
-                                                        Ver
-                                                    </div>
-                                                </div>
-                                            @else
-                                                {{-- Si $photoSave es la ruta de la imagen guardada --}}
-                                                <img id="image-preview" class="modern-image-preview"
-                                                    src="{{ asset('storage/' . $photoSave) }}" alt="Imagen del dojo">
-                                            @endif
-                                        @else
-                                            {{-- Icono placeholder si no hay imagen --}}
-                                            <i class="fa-solid fa-camera modern-image-preview"
-                                                style="font-size: 3rem; color: #1d4ea9; border: none;"></i>
-                                        @endif
-
-                                        {{-- La etiqueta que actúa como botón --}}
-                                        <label for="file-upload-save" class="file-label">
-                                            <i class="fas fa-upload"></i>
-                                            {{-- Muestra el nombre del archivo o un texto por defecto --}}
-                                            <span
-                                                class="file-name">{{ $photoSave ? ($photoSave instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile ? $photoSave->getClientOriginalName() : basename($photoSave)) : 'Subir Imagen...' }}</span>
-                                        </label>
-
-                                        {{-- El input de archivo real (oculto) --}}
-                                        {{-- wire:model.live="photoSave" es correcto para Livewire file uploads --}}
-                                        {{-- wire:key='{{$photoSaveKey}}' ayuda a Livewire a manejar el input file --}}
-                                        <input type="file" id="file-upload-save" class="file-input"
-                                            wire:model.live="photoSave" wire:key='{{ $photoKey }}'
-                                            style="display:none" accept="image/*">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12" style="display: flex; justify-content: center">
-                                <button class="modern-btn-success" type="submit">
-                                    <i class="fa-solid fa-check"></i>
-                                    <span>Guardar</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    @error('photo')
-                        <div class="alert alert-danger mt-2">{{ $message }}</div>
-                    @enderror
-                </form>
-
-                <!--===================================================-->
-                <!--End Icons Addons-->
-            </div>
-        </div>
-    </div>
+<div x-data="{open: false}" x-cloak>
 
     <!-- Modal para editar -->
     @if ($modal)
@@ -214,7 +41,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="control-label color-paragraph label-form" for="locationEdit"
-                                            style="@error('locateEdit') color:#e90326; @enderror">Ubicación del
+                                            style="@error('locationEdit') color:#e90326; @enderror">Ubicación del
                                             Dojo</label>
                                         <div class="input-group mar-btm">
                                             <span class="input-group-addon"><i
@@ -223,7 +50,7 @@
                                                 wire:model.live='locationEdit' placeholder="Ingrese la ubicación"
                                                 autocomplete="off">
                                         </div>
-                                        @error('locateEdit')
+                                        @error('locationEdit')
                                             <div class="alert alert-danger mt-2">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -248,6 +75,7 @@
                                         @enderror
                                     </div>
                                 </div>
+
                                 <!--Photo -->
                                 <div class="col-sm-6">
                                     <div class="form-group" style="margin-top:0">
@@ -256,9 +84,9 @@
                                         <div class="modern-file-input-container"> {{-- Contenedor para el input de archivo --}}
 
                                             @if ($photo)
-                                                <button class="close-btn-image" type="button"
+                                                <div class="close-btn-image" 
                                                     wire:click="removePhoto"><i class="fa-solid fa-trash"
-                                                        style="font-size: 18px"></i></button>
+                                                        style="font-size: 18px"></i></div>
                                                 {{-- La previsualización de imagen --}}
                                                 {{-- Asegúrate de tener un public property $photo y usar Livewire\Features\SupportFileUploads\WithFileUploads --}}
                                                 {{-- Y si guardas la imagen, ajusta la URL src --}}
@@ -297,6 +125,9 @@
                                                 wire:model.live="photo" wire:key='{{ $photoKey }}'
                                                 style="display:none" accept="image/*">
                                         </div>
+                                        @error('photo')
+                                            <div class="alert-error animated shake">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -322,11 +153,18 @@
 
     <!-- Titulo de la Pagina -->
     <div class="panel-custom animated zoomIn" style='padding-bottom: 10px; margin: 20px 0;'>
-        <div class="modern-container-header" style="justify-content:space-around; flex-wrap:wrap; gap:15px">
+        <div class="modern-container-header" style="justify-content:space-beetween; flex-wrap:wrap; gap:15px">
             <div class="modern-header">
                 <span class="text-center color-title">{{ __('Lista de Dojos Registrados') }}</span>
                 <span class="text-center color-paragraph"
-                    style="margin:0px;">{{ __('se muestran en orde de mas recientes a mas antiguos') }}</span>
+                    style="margin:0px;">{{ __('Aqui puedes crear, editar y eliminar dojos') }}</span>
+            </div>
+            <div class="modern-header">
+                <button @click="open = !open" class="new-btn-ultimate new-btn-responsive" style="font-size:22px; height: 60px; margin: auto 0">
+                    <i x-show="!open" class="fa-solid fa-plus" style="font-size:25px"></i>
+                    <i x-show="open" class="fa-solid fa-xmark" style="font-size:25px"></i>
+                    <span x-text="open ? 'Cerrar' : 'Nuevo Dojo'"></span>
+                </button>
             </div>
             <div class="modern-header">
                 <span class="text-center color-title">{{ __('Ver Como') }}</span>
@@ -343,14 +181,157 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal para Nuevo Dojo -->
+    <div x-show="open" x-transition.duration.500ms>
+        <div class="panel-custom">
+            <div class="modern-container-header">
+                <div class="modern-header">
+                    <span class="text-center color-title">{{ __('Nuevo Dojo') }}</span>
+                    <span class="text-center color-paragraph"
+                        style="margin:0px;">{{ __('Agrega un Nuevo Dojo al sistema') }}</span>
+                </div>
+            </div>
+
+            <!--Icons Addons-->
+            <!--===================================================-->
+            <form wire:submit='save' wire:key="dojo-form-save">
+                <div class="panel-body" style="padding-top: 0">
+                    <div class="row">
+                        <!-- Nombre del Dojo -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+
+                                <label class="control-label color-paragraph label-form" for="name"
+                                    style="@error('name') color:#e90326; @enderror">Nombre del Dojo</label>
+                                <div class="input-group mar-btm">
+                                    <label class="input-group-addon" for="name"><i
+                                            class="fa-solid fa-user"></i></label>
+                                    <input type="text" class="form-control" id="name" wire:model.live='name'
+                                        placeholder="Ingrese el nombre" autocomplete="off" required>
+                                </div>
+                                @error('name')
+                                    <div class="alert-error animated shake">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Ubicación del Dojo -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label color-paragraph label-form" for="location"
+                                    style="@error('location') color:#e90326; @enderror">Ubicación del Dojo</label>
+                                <div class="input-group mar-btm">
+                                    <label class="input-group-addon" for="location"><i
+                                            class="fa-solid fa-location-dot"></i></label>
+                                    <input type="text" class="form-control" id="location" wire:model.live='location'
+                                        placeholder="Ingrese la ubicación" autocomplete="off" required>
+                                </div>
+                                @error('location')
+                                    <div class="alert-error animated shake">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Descripción -->
+                        <div class="col-sm-6">
+                            <div class="form-group" style="margin-top:0">
+                                <label class="control-label color-paragraph label-form" for="description"
+                                    style="@error('description') color:#e90326; @enderror">Breve Descripción</label>
+                                <div class="input-group mar-btm">
+                                    <label class="input-group-addon" for="description"><i
+                                            class="fa-solid fa-pen-to-square"></i></label>
+                                    <textarea class="form-control" id="description" wire:model.live='description'
+                                        placeholder="Ingrese una breve descripción" style="height: 170px; overflow-y: auto; resize: none;" required></textarea>
+                                </div>
+                                @error('description')
+                                    <div class="alert-error animated shake">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- foto --}}
+                        <div class="col-sm-6">
+                            <div class="form-group" style="margin-top:0">
+                                <label class="control-label color-paragraph label-form" for="file-upload-save">Agrega
+                                    una Imagen</label>
+                                <div class="modern-file-input-container"> {{-- Contenedor para el input de archivo --}}
+
+                                    @if ($photoSave)
+                                        <div class="close-btn-image" wire:click="removePhotoSave"><i
+                                                class="fa-solid fa-trash" style="font-size: 18px"></i></div>
+                                        {{-- La previsualización de imagen --}}
+                                        {{-- Asegúrate de tener un public property $photoSave y usar Livewire\Features\SupportFileUploads\WithFileUploads --}}
+                                        {{-- Y si guardas la imagen, ajusta la URL src --}}
+                                        @if (is_a($photoSave, \Livewire\Features\SupportFileUploads\TemporaryUploadedFile::class))
+                                            <div class="modern-image-container">
+                                                <img id="image-preview" class="modern-image-preview"
+                                                    src="{{ $photoSave->temporaryUrl() }}" alt="Imagen seleccionada"
+                                                    wire:click='viewImage'>
+                                                <div class="image-overlay-text">
+                                                    Ver
+                                                </div>
+                                            </div>
+                                        @else
+                                            {{-- Si $photoSave es la ruta de la imagen guardada --}}
+                                            <img id="image-preview" class="modern-image-preview"
+                                                src="{{ asset('storage/' . $photoSave) }}" alt="Imagen del dojo">
+                                        @endif
+                                    @else
+                                        {{-- Icono placeholder si no hay imagen --}}
+                                        <i class="fa-solid fa-camera modern-image-preview"
+                                            style="font-size: 3rem; color: #1d4ea9; border: none;"></i>
+                                    @endif
+
+                                    {{-- La etiqueta que actúa como botón --}}
+                                    <label for="file-upload-save" class="file-label">
+                                        <i class="fas fa-upload"></i>
+                                        {{-- Muestra el nombre del archivo o un texto por defecto --}}
+                                        <span
+                                            class="file-name">{{ $photoSave ? ($photoSave instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile ? $photoSave->getClientOriginalName() : basename($photoSave)) : 'Subir Imagen...' }}</span>
+                                    </label>
+
+                                    {{-- El input de archivo real (oculto) --}}
+                                    {{-- wire:model.live="photoSave" es correcto para Livewire file uploads --}}
+                                    {{-- wire:key='{{$photoSaveKey}}' ayuda a Livewire a manejar el input file --}}
+                                    <input type="file" id="file-upload-save" class="file-input"
+                                        wire:model.live="photoSave" wire:key='{{ $photoKey }}'
+                                        style="display:none" accept="image/*">
+
+                                </div>
+                                @error('photoSave')
+                                    <div class="alert-error animated shake">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12" style="display: flex; justify-content: center">
+                            <button class="modern-btn-success" type="submit">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Guardar</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!--===================================================-->
+            <!--End Icons Addons-->
+        </div>
+    </div>
     
-    <!-- Buscador -->
-    <div class="panel-custom animated zoomIn" style=' margin: 20px 0;'>
+    <!-- Buscador Y Cartas y Tables -->
+    <div class="panel-custom animated zoomIn" style=' margin: 20px 0;padding-bottom: 10px;'>
+        
         <div class="modern-container-header">
             <div class="modern-header" style="margin-bottom:5px;">
                 <span class="text-center color-title" style="font-size:25px">{{ __('Buscar Dojos') }}</span>
             </div>
         </div>
+        <!-- Buscador -->
         <div class="table-controls" style="margin:0;">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass" style="color:#002569"></i>
@@ -404,7 +385,146 @@
             </div>
 
         </div>
+    
+
+        <!-- Card con los Dojos -->
+        @if($cardDojos)
+            
+            <div class="grid-container animated zoomIn">
+                @foreach ($dojos as $dojo)
+                    <div class="dojo-card-ultimate @if ($changeTable) animated fadeIn @endif"
+                        wire:key='register-{{ $dojo->id }}'>
+                        <div class="dojo-image-container-ultimate">
+                            @if ($dojo->photo)
+                                <div class="dojo-image-ultimate">
+                                    <img src="{{ asset('storage/' . $dojo->photo) }}">
+                                </div>
+                            @else
+                                <div class="dojo-image-ultimate">
+                                    <img src="{{ asset('image/dojo-default.jpg') }}">
+                                </div>
+                            @endif
+                        </div>
+                        <div class="dojo-content-ultimate" style="justify-content:center; align-items:center">
+                                <h3 class="dojo-title-ultimate"><i class="fa-solid fa-vihara"></i>{{ $dojo->name }}</h3>
+                                
+                                <div class="dojo-location-ultimate" style="font-size:16px">
+                                    <i class="fa-solid fa-location-dot"
+                                        style='color:red; font-size:15px; margin-right: 5px'></i>
+                                    <span>{{ $dojo->location }}</span>
+                                </div>
+                                <span style="color:black; font-size: 15px; font-weight: 600"><i class="fa-solid fa-user-ninja" style="color:black; margin: 10px"></i>Sensei: {{$dojo->sensei->name ?? 'no tiene asignado'}}</span>
+                                <span class="" style="font-style: italic; font-size:15px; margin: 10px">{{ $dojo->description }}</span>
+
+                            <div class="dojo-actions-ultimate">
+                                <button class="edit-btn-ultimate" wire:click='edit({{ $dojo->id }})'>
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <span>Editar</span>
+                                </button>
+                                <button class="delete-btn-ultimate" wire:click='destroyModal({{ $dojo->id }})'>
+                                    <i class="fa-solid fa-trash"></i>
+                                    <span>Eliminar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            
+        @endif
+
+        <!-- Table con los Dojos -->
+        @if($tableDojos)
+            <div class="table-container" style="margin:0 10px 10px 10px">
+                <table class="glass-table animated zoomIn">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span>Foto</span>
+                            </th>
+                            <th wire:click="sortByModel('name')" class="sortable">
+                                <span>Nombre</span>
+                                <span>
+                                    @if ($sortBy === 'name')
+                                        <i class="fa-solid fa-arrow-{{ $sortDirection === 'asc' ? 'up' : 'down' }}"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th wire:click="sortByModel('location')" class="sortable">
+                                <span>Ubicación</span>
+                                <span>
+                                    @if ($sortBy === 'location')
+                                        <i class="fa-solid fa-arrow-{{ $sortDirection === 'asc' ? 'up' : 'down' }}"></i>
+                                    @endif
+                                </span>
+                            </th>
+                            <th colspan="2">Sensei</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($dojos as $dojo)
+                            <tr wire:key="dojo-{{ $dojo->id }}"
+                                class="{{ $loop->odd ? 'odd-row' : 'even-row' }} hoverable-row">
+                                <td style="display: flex; justify-content:center;">
+                                    @if ($dojo->photo)
+                                        <div class="dojo-photo">
+                                            <img src="{{ asset('storage/' . $dojo->photo) }}" alt="{{ $dojo->name }}"
+                                                class="dojo-image">
+                                        </div>
+                                    @else
+                                        <div class="dojo-photo">
+                                            <img src="{{ asset('image/dojo-default.jpg') }}" class="dojo-image"
+                                                alt="dojo-image">
+                                        </div>
+                                    @endif
+                                </td>
+                                <td>{{ $dojo->name }}</td>
+                                <td>{{ $dojo->location }}</td>
+                                @if($dojo->sensei)
+                                    <td>
+                                        @if ($dojo->sensei->photo)
+                                            <div class="dojo-photo">
+                                                <img src="{{ asset('storage/' . $dojo->sensei->photo) }}" alt="{{ $dojo->sensei->name }}"
+                                                    class="dojo-image">
+                                            </div>
+                                        @else
+                                            <div class="dojo-photo">
+                                                <img src="{{ asset('image/sensei-default.jpg') }}" class="dojo-image"
+                                                    alt="dojo-image">
+                                            </div>
+                                        @endif
+                                    </td>
+                                    <td>{{$dojo->sensei->name ?? 'sin sensei'}}</td>
+
+                                @else
+                                    <td>No tiene un Sensei Asignado</td>
+                                    <td></td>
+                                @endif
+                                <td class="description-cell">
+                                    {{ Str::limit($dojo->description, 50) }}
+                                </td>
+                                <td>
+                                    <div class="dojo-actions-ultimate">
+                                        <button wire:click='edit({{ $dojo->id }})' class="edit-btn-ultimate edit-btn-ultimate-table">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                        <button wire:click='destroyModal({{ $dojo->id }})' class="delete-btn-ultimate delete-btn-ultimate-table">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            
+        @endif
+    
     </div>
+
     {{-- Modal para Mostrar Fotos --}}
     @if ($photoModal)
         <div wire:key="image-modal">
@@ -425,42 +545,6 @@
             </div>
         </div>
     @endif
-
-
-    <!-- Table -->
-    {{-- <div class="panel">
-        <div class="panel-heading">
-            <h3 class="panel-title">Dojos Registrados</h3>
-        </div>
-        <div class="panel-body" style="padding-bottom:0">
-            <div class="table-responsive @if ($changeTable) animated flash @endif">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Descripcion</th>
-                            <th>Ubicacion</th>
-                            <th class="text-center" colspan="2">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody wire:ke>
-                        
-                        @foreach ($dojos as $dojo)
-                            <tr wire:key='registro-{{$dojo->id}}'>
-                                <td class="{{$dojo->id}}">{{ $dojo->name }}</td>
-                                <td>{{ $dojo->description }}</td>
-                                <td>{{ $dojo->location }}</td>
-                                <td class="text-center"><button data-target="#form-edit" data-toggle="modal" class="btn btn-mint" wire:click='edit({{$dojo->id}})'>Editar</button></td>
-                                <td class="text-center"><button class="btn btn-danger" wire:click='destroyModal({{$dojo->id}})'>Eliminar</button></td>        
-                            </tr>
-                        @endforeach
-  
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        {{$dojos->links('vendor.pagination.paginador')}}
-    </div> --}}
 
     @if ($successMessage)
         <div wire:key="success-modal" x-data="{ open: true }" x-show="open" x-init="setTimeout(() => {
@@ -530,119 +614,7 @@
         </div>
     @endif
 
-    <!-- Card con los Dojos -->
-    @if($cardDojos)
-        <div class="panel-custom animated zoomIn" style="padding:15px; margin-bottom: 10px;">
-            <div class="grid-container">
-                @foreach ($dojos as $dojo)
-                    <div class="dojo-card-ultimate @if ($changeTable) animated fadeIn @endif"
-                        wire:key='register-{{ $dojo->id }}'>
-                        <div class="dojo-image-container-ultimate">
-                            @if ($dojo->photo)
-                                <div class="dojo-image-ultimate">
-                                    <img src="{{ asset('storage/' . $dojo->photo) }}">
-                                </div>
-                            @else
-                                <div class="dojo-image-ultimate">
-                                    <img src="{{ asset('image/dojo-default.jpg') }}">
-                                </div>
-                            @endif
-                        </div>
-                        <div class="dojo-content-ultimate">
-                            <div class="dojo-text-content">
-                                <h3 class="dojo-title-ultimate">{{ $dojo->name }}</h3>
-                                <p class="dojo-desc-ultimate">{{ $dojo->description }}</p>
-                                <div class="dojo-location-ultimate">
-                                    <i class="fa-solid fa-location-dot"
-                                        style='color:red; font-size:15px; margin-right: 10px'></i>
-                                    <span>{{ $dojo->location }}</span>
-                                </div>
-                            </div>
-
-                            <div class="dojo-actions-ultimate">
-                                <button class="edit-btn-ultimate" wire:click='edit({{ $dojo->id }})'>
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                    <span>Editar</span>
-                                </button>
-                                <button class="delete-btn-ultimate" wire:click='destroyModal({{ $dojo->id }})'>
-                                    <i class="fa-solid fa-trash"></i>
-                                    <span>Eliminar</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    @endif
-
-    <!-- Table con los Dojos -->
-    @if($tableDojos)
-        <div class="table-wrapper animated zoomIn">
-            <table class="glass-table">
-                <thead>
-                    <tr>
-                        <th>
-                            <span>Foto</span>
-                        </th>
-                        <th wire:click="sortByModel('name')" class="sortable">
-                            <span>Nombre</span>
-                            <span>
-                                @if ($sortBy === 'name')
-                                    <i class="fa-solid fa-arrow-{{ $sortDirection === 'asc' ? 'up' : 'down' }}"></i>
-                                @endif
-                            </span>
-                        </th>
-                        <th wire:click="sortByModel('location')" class="sortable">
-                            <span>Ubicación</span>
-                            <span>
-                                @if ($sortBy === 'location')
-                                    <i class="fa-solid fa-arrow-{{ $sortDirection === 'asc' ? 'up' : 'down' }}"></i>
-                                @endif
-                            </span>
-                        </th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($dojos as $dojo)
-                        <tr wire:key="dojo-{{ $dojo->id }}"
-                            class="{{ $loop->odd ? 'odd-row' : 'even-row' }} hoverable-row">
-                            <td style="display: flex; justify-content:center;">
-                                @if ($dojo->photo)
-                                    <div class="dojo-photo">
-                                        <img src="{{ asset('storage/' . $dojo->photo) }}" alt="{{ $dojo->name }}"
-                                            class="dojo-image">
-                                    </div>
-                                @else
-                                    <div class="dojo-photo">
-                                        <img src="{{ asset('image/dojo-default.jpg') }}" class="dojo-image"
-                                            alt="dojo-image">
-                                    </div>
-                                @endif
-                            </td>
-                            <td>{{ $dojo->name }}</td>
-                            <td>{{ $dojo->location }}</td>
-                            <td class="description-cell">
-                                {{ Str::limit($dojo->description, 50) }}
-                            </td>
-                            <td>
-                                <div class="dojo-actions-ultimate">
-                                    <button wire:click='edit({{ $dojo->id }})' class="edit-btn-ultimate">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </button>
-                                    <button wire:click='destroyModal({{ $dojo->id }})' class="delete-btn-ultimate">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    @endif
+    
 
     {{ $dojos->links('vendor.livewire.bootstrap') }}
     @push('scripts')

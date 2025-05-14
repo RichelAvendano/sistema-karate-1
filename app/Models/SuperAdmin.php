@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SuperAdmin extends Model
 {
+    public $timestamps = false;
+    
     protected $fillable = [
         'name',
         'user_id'

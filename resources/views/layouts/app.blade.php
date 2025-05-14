@@ -7,6 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <link rel="icon" type="image/png" href="{{asset('image/icono-dojo.png')}}">
+
         <link href="{{asset('css\bootstrap.min.css')}}" rel="stylesheet">
 
         <!--Nifty Stylesheet [ REQUIRED ]-->
@@ -28,25 +30,29 @@
         @vite(['resources/css/form.css'])
         @vite(['resources/css/table.css'])
         @vite(['resources/css/select.css'])
+        @vite(['resources/css/input-date.css'])
+        @vite(['resources/js/chart.js'])
         
+        @livewireStyles
         @stack('styles')      
     </head>
     <body class="font-sans">
 
         <div id="container" class="effect aside-float aside-bright mainnav-lg">
+            
             {{ $slot }}           
-
+            
             <!--NAVBAR-->
             <!--===================================================-->
             @include('layouts.navbar')    
 
             <!--MAIN NAVIGATION-->
             <!--===================================================-->
-            @include('layouts.main-navbar')
+            @livewire('main-navbar')
 
             <!-- FOOTER -->
             <!--===================================================-->
-            @include('layouts.footer')
+            {{-- @include('layouts.footer') --}}
 
             <!-- SCROLL PAGE BUTTON -->
             <!--===================================================-->
@@ -55,11 +61,14 @@
             </button>
         </div>
 
+
+        @livewireScripts
+
+        @stack('scripts') 
+
         <script src="{{asset('js\jquery.min.js')}}"></script>    
         <script src="{{asset('js\nifty.min.js')}}"></script>
         <script src="{{asset('js\bootstrap.min.js')}}"></script>
-        <script src="{{asset('js\demo\ui-modals.js')}}"></script>
-
-        @stack('scripts')  
+        <script src="{{asset('js\demo\ui-modals.js')}}"></script>    
     </body>
 </html>

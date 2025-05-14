@@ -6,22 +6,25 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        
+        <link rel="icon" type="image/png" href="{{asset('image/icono-dojo.png')}}" sizes="64x64">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <!-- Animate.css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
         <!-- Scripts -->
         @vite(['resources/css/bootstrap.css'])
- 
-    </head>
-    <body class="font-sans antialiased">
-
-         @include('layouts.home.navbar')
-
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
-
-        @include('layouts.home.footer')
+        @vite(['resources/js/bootstrap.js'])
+        @vite(['resources/css/app.css'])
+        @stack('styles')      
         
-        @vite(['resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+
+        
+        {{ $slot }}
+
     </body>
 </html>

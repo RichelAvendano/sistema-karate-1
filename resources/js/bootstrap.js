@@ -1,4 +1,3 @@
-import axios from 'axios';
-window.axios = axios;
+// En tu main.js o app.js
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

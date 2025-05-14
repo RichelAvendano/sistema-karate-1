@@ -1,0 +1,129 @@
+.event-card-glass {
+    background: linear-gradient(135deg, rgba(200, 220, 255, 0.123), rgba(255, 200, 220, 0.107));
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    max-width: 350px;
+    width: 100%;
+}
+
+.event-card-glass:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.event-image-container {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.event-card-glass:hover .event-image {
+    transform: scale(1.05);
+}
+
+.event-type-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, rgb(59 130 246 / 59%), rgb(220 38 38 / 60%));
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+}
+
+.event-content {
+    padding: 20px;
+    padding-top: 0px;
+}
+
+.event-title {
+    color: #2a3f5f;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.event-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    color: #4a5568;
+    font-size: 1.5rem;
+}
+
+.meta-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    color: #c53030;
+}
+
+.event-description {
+    color: #4a5568;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.event-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background: rgba(100, 150, 255, 0.2);
+    color: #2a3f5f;
+    border: 1px solid rgba(100, 150, 255, 0.4);
+}
+
+.edit-btn:hover {
+    background: rgba(100, 150, 255, 0.3);
+}
+
+.delete-btn {
+    background: rgba(255, 100, 100, 0.2);
+    color: #c53030;
+    border: 1px solid rgba(255, 100, 100, 0.4);
+}
+
+.delete-btn:hover {
+    background: rgba(255, 100, 100, 0.3);
+}
+
+@media (max-width: 768px) {
+    .event-card-glass {
+        max-width: 100%;
+    }
+}

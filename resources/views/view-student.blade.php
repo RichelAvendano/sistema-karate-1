@@ -16,9 +16,7 @@
                 
                 <div class="row">
                     <div class="col-lg-12">
-            
-                        
-                        Senseis
+                        @livewire('view-student.component-view-student')
                     </div>
                 </div>				
                     

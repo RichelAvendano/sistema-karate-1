@@ -13,13 +13,17 @@
 
         <!-- Scripts -->
         @vite(['resources/css/bootstrap.css'])
+        @vite(['resources/css/app.css'])
+        @stack('styles')    
+        @livewireStyles  
+
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="bg-light d-flex align-items-center justify-content-center vh-100">
+    <body>
             
-            {{ $slot }}
+        {{ $slot }}
             
-        </div>
         @vite(['resources/js/app.js'])
+        @stack('scripts')
+        @livewireScripts
     </body>
 </html>

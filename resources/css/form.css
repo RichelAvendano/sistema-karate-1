@@ -144,11 +144,15 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    background: linear-gradient(135deg, #219ebc66, #0230471f);
+    background: linear-gradient(135deg, #219ebc66, #0230471f) !important;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+}
+
+.modern-header-select{
+    background: linear-gradient(135deg, #219ebc38, #02304700);
 }
 
 .modern-header-tab{
