@@ -2,7 +2,7 @@
 
     <!-- Buscador y Tabla -->
     <div x-data='{openEdit:false, openDestroy: false, openStudent: false, activeButton: "sensei", openConfirm1: false, openStudentActive:true, openStudentInactive: false}' x-cloak>
-        <div class="panel-custom animated zoomIn" style=' margin: 20px 0;padding:10px'>
+        <div class="panel-custom animated fadeIn" style=' margin: 20px 0;padding:10px'>
 
             <div class="modern-container-header" style="justify-content:space-around; flex-wrap:wrap; gap:15px">
                 <div class="modern-header" style="margin-bottom:5px;">
@@ -67,7 +67,7 @@
             <!-- Tabla -->
             <div class="table-container">
 
-                <table class="glass-table animated zoomIn @if ($changeTable) animated fadeIn @endif" style="min-width: 625px">
+                <table class="glass-table animated fadeIn @if ($changeTable) animated fadeIn @endif" style="min-width: 625px">
                     <thead>
                         <tr>
                             <th><span>Foto</span></th>
@@ -155,13 +155,13 @@
                                 <td>
                                     <div class="dojo-actions-ultimate">
                                         <button wire:click='studentsSensei({{$sensei->id}},"{{$sensei->status}}")' @click="openStudent = !openStudent" class="new-btn-ultimate new-btn-ultimate-table">
-                                            <i class="fa-solid fa-user-graduate"></i>
+                                            <i class="fa-solid fa-user-graduate"></i> Atletas
                                         </button>
                                         <button wire:click='editModal({{ $sensei->id }})' @click="openEdit = !openEdit" class="edit-btn-ultimate edit-btn-ultimate-table">
-                                            <i class="fa-solid fa-pen"></i>
+                                            <i class="fa-solid fa-pen"></i> Editar
                                         </button>
                                         <button wire:click='destroyModal({{ $sensei->id }},{{$sensei->user_id}})' @click="openDestroy = !openDestroy" class="delete-btn-ultimate delete-btn-ultimate-table">
-                                            <i class="fa-solid fa-trash"></i>
+                                            <i class="fa-solid fa-trash"></i> Eliminar
                                         </button>
                                     </div>
                                 </td>

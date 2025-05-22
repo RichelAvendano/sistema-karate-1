@@ -731,7 +731,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                        <h1 class="hero-title" id="typewriter"></h1>
+                        <h1 class="hero-title">Asociación de <span>Karate Do</span> de Barinas</h1>
                         <p class="hero-subtitle animate">Sistema completo para administrar dojos, senseis, atletas y
                             eventos en una sola plataforma</p>
 
@@ -1066,31 +1066,9 @@
 
 
     <script>
-        // Animación de escritura
-        const text = "Asociación de Karate Do de Barinas";
-        let i = 0;
-        const speed = 100;
-
-        function typeWriter() {
-            if (i < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
-            } else {
-                // Esperar un tiempo antes de reiniciar
-                setTimeout(() => {
-                    document.getElementById("typewriter").innerHTML = "";
-                    i = 0;
-                    typeWriter(); // Reiniciar animación
-                }, 2000); // Espera 2 segundos antes de reiniciar
-            }
-        }
-
-
         // Inicializar animaciones al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
             // Animación de escritura
-            typeWriter();
 
             // Animación al hacer scroll
             const animateElements = document.querySelectorAll('.animate, .delay-1, .delay-2, .delay-3');

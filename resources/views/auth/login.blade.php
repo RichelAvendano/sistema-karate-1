@@ -94,7 +94,7 @@
                 width: 120px; /* Un poco más grande que la imagen */
                 height: 120px;
                 border-radius: 50%; /* Hace que el borde sea completamente redondo */
-                background: linear-gradient(135deg, rgb(100 150 255), rgb(255 100 150));
+                background: linear-gradient(135deg, rgb(0 82 255), rgb(255 0 82));
                 display: flex;
                 justify-content: center;
                 align-items: center;

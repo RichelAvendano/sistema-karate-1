@@ -262,6 +262,10 @@ class ComponentViewStudent extends Component
         
         $sensei = Student::find($this->id_selected);
 
+        if (!$this->photoSensei) {
+            $this->addError('photoSensei', 'Debes subir una imagen antes de enviar.');
+            return;
+        }
         $this->validate(
             [
                 'nameSensei' => ['required', 'string', 'min:8'],
@@ -271,7 +275,7 @@ class ComponentViewStudent extends Component
                 'selectedValueDan' => ['required', 'string'],
                 'organizationSensei' => ['required', 'string'],
                 'dateOfBirthSensei' => ['required', 'date'],
-                'photoSensei' => ['required', 'image']
+                'photoSensei' => [$this->photoSensei instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile ? 'image' : 'nullable'],
             ],
             attributes: [
                 'nameSensei' => 'nombre del sensei',

@@ -2,7 +2,7 @@
 
     <!-- Buscador y Tabla -->
     <div x-data='{openEdit:false, openDestroy: false}' x-cloak>
-        <div class="panel-custom animated zoomIn" style=' margin: 20px 0;padding:10px'>
+        <div class="panel-custom animated fadeIn" style=' margin: 20px 0;padding:10px'>
 
             <div class="modern-container-header" style="justify-content:space-around; flex-wrap:wrap; gap:15px">
                 <div class="modern-header" style="margin-bottom:5px;">
@@ -66,7 +66,7 @@
 
             <!-- Tabla -->
             <div class="table-container">
-                <table class="glass-table animated zoomIn @if ($changeTable) animated fadeIn @endif" style="min-width: 550px">
+                <table class="glass-table animated fadeIn @if ($changeTable) animated fadeIn @endif" style="min-width: 550px">
                     <thead>
                         <tr>
                             <th wire:click="sortByModel('name')" class="sortable">
@@ -124,10 +124,10 @@
                                 <td>
                                     <div class="dojo-actions-ultimate">
                                         <button wire:click='editModal({{ $user->id }})' @click="openEdit = !openEdit" class="edit-btn-ultimate edit-btn-ultimate-table">
-                                            <i class="fa-solid fa-pen"></i>
+                                            <i class="fa-solid fa-pen"></i> Editar
                                         </button>
                                         <button wire:click='destroyModal({{ $user->id }})' @click="openDestroy = !openDestroy" class="delete-btn-ultimate delete-btn-ultimate-table">
-                                            <i class="fa-solid fa-trash"></i>
+                                            <i class="fa-solid fa-trash"></i> Eliminar
                                         </button>
                                     </div>
                                 </td>

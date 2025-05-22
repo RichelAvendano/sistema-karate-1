@@ -389,7 +389,7 @@
     @endpush
 
     {{-- titulo de estadisticas --}}
-    <div x-data="{ activeButton: '{{$buttonDefaultSearch ?? "upcoming"}}' }" class="row" style="display: flex; justify-content: center" x-cloak>
+    <div x-data="{ activeButton: '{{$buttonDefaultSearch ?? "all"}}' }" class="row" style="display: flex; justify-content: center" x-cloak>
         <div class="pad-all text-center animated zoomIn" style="background: linear-gradient(135deg, #ff010121, #00aaff26); max-width: 400px; padding: 0; margin: 10px;">
             <h3 id="color-title-glass" style="color: black !important; margin-top: 10px"><i class="fa-solid fa-calendar-days"></i> Eventos: ordenar por</i></h3>
             <div class="chart-header" style="flex-wrap: wrap">

@@ -242,10 +242,15 @@ class ComponentViewSensei extends Component
             $this->addError('dateOfBirthSensei', 'Debe tener al menos 18 años');
             return;
         }
-        
         $sensei = Sensei::find($this->id_selected);
         
         // ✅ Validar datos, permitiendo que la contraseña sea opcional en la actualización
+
+        if (!$this->photoSensei) {
+            $this->addError('photoSensei', 'Debes subir una imagen antes de enviar.');
+            return;
+        }
+
         $this->validate(
             [
                 'nameSensei' => ['required', 'string', 'min:8'],
@@ -255,7 +260,7 @@ class ComponentViewSensei extends Component
                 'selectedValueDan' => ['required', 'string'],
                 'organizationSensei' => ['required', 'string'],
                 'dateOfBirthSensei' => ['required', 'date'],
-                'photoSensei' => ['required', 'image']
+                'photoSensei' => [$this->photoSensei instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile ? 'image' : 'nullable'],
             ],
             attributes: [
                 'nameSensei' => 'nombre del sensei',

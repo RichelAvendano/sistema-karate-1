@@ -4,8 +4,8 @@
     @endpush
 
     <!-- Titulo y Modal para Crear Usuarios -->
-    <div x-data='{open: false, openTab1: true, openTab2: false, openTab3: false}' x-cloak>
-        <div class="panel-custom animated zoomIn" style='padding-bottom: 10px; margin: 20px 0;'>
+    <div x-data='{open: true, openTab1: true, openTab2: false, openTab3: false}'>
+        <div class="panel-custom animated fadeIn" style='padding-bottom: 10px; margin: 20px 0;'>
             <div class="modern-container-header" style="justify-content:space-around; flex-wrap:wrap; gap:15px">
                 <div class="modern-header">
                     <span class="text-center color-title">{{ __('Panel de Administrador') }}</span>
@@ -25,24 +25,37 @@
         </div>
         
         <!-- Modal para Usuarios y Botones -->
-        <div x-show="open" x-transition.duration.500ms>
+        <div x-show="open" x-transition.duration.200ms>
 
-            <div class="modern-container-header" style="justify-content: start;flex-wrap:wrap; gap: 0 3px">
-                <button :class="openTab1 ? 'active' : ''" @click="openTab1 = !openTab1; openTab2 = false; openTab3 = false" type="button" class="modern-header-tab" style="">
-                    <span class="text-center color-title" style="color:white; font-size: 20px">{{ __('Administrador') }}</span>
-                </button>
-                <button :class="openTab2 ? 'active' : ''" @click="openTab2 = !openTab2; openTab1 = false; openTab3 = false" type="button" class="modern-header-tab" style="">
-                    <span class="text-center color-title" style="color:white; font-size: 20px">{{ __('Sensei') }}</span>
-                </button>
-                <button :class="openTab3 ? 'active' : ''" @click="openTab3 = !openTab3; openTab1 = false; openTab2 = false" type="button" class="modern-header-tab" style="">
-                    <span class="text-center color-title" style="color:white; font-size: 20px">{{ __('Estudiante') }}</span>
-                </button>
+            <div class="panel-custom " style="border-bottom: none;border-radius: 10px 10px 0px 0px;display:inline-block">
+                <div class="modern-container-header" style="justify-content: start; flex-wrap: wrap; gap: 0 3px; padding: 7px; margin:0">
+                    <button :class="openTab1 ? 'active' : ''" 
+                        @click="if (!openTab1) { openTab1 = true; openTab2 = false; openTab3 = false }" 
+                        type="button" class="modern-header-tab"
+                        style="border-radius: 10px 10px 0px 0px;">
+                        <span class="text-center color-title" style="color:white; font-size: 20px">{{ __('Administrador') }}</span>
+                    </button>
+                    
+                    <button :class="openTab2 ? 'active' : ''" 
+                        @click="if (!openTab2) { openTab2 = true; openTab1 = false; openTab3 = false }" 
+                        type="button" class="modern-header-tab"
+                        style="border-radius: 10px 10px 0px 0px;">
+                        <span class="text-center color-title" style="color:white; font-size: 20px">{{ __('Sensei') }}</span>
+                    </button>
+                    
+                    <button :class="openTab3 ? 'active' : ''" 
+                        @click="if (!openTab3) { openTab3 = true; openTab1 = false; openTab2 = false }" 
+                        type="button" class="modern-header-tab"
+                        style="border-radius: 10px 10px 0px 0px;">
+                        <span class="text-center color-title" style="color:white; font-size: 20px">{{ __('Estudiante') }}</span>
+                    </button>
+                </div>
             </div>
-            
+
             <!-- Modal para Administradores -->
-            <div x-show="openTab1" class="panel-custom animated fadeIn" style="border-radius: 0 0 10px 10px">
+            <div x-show="openTab1" class="panel-custom" style="border-radius: 0 0 10px 10px;border-top: none;padding-top:20px" x-transition.duration.100ms>
                 
-                <div class="modern-container-header">
+                <div class="modern-container-header" style="margin:0;">
                     <div class="modern-header">
                         <span class="text-center color-title">{{ __('Nuevo Administrador') }}</span>
                     </div>
@@ -132,9 +145,9 @@
             </div>
 
             <!-- Modal para Senseis -->
-            <div x-show="openTab2" class="panel-custom animated fadeIn" style="border-radius: 0 0 10px 10px"> 
+            <div x-show="openTab2" class="panel-custom" style="border-radius: 0 0 10px 10px;border-top: none;padding-top:20px" x-transition.duration.100ms> 
                 
-                <div class="modern-container-header">
+                <div class="modern-container-header" style="margin:0;">
                     <div class="modern-header">
                         <span class="text-center color-title">{{ __('Nuevo Sensei') }}</span>
                     </div>
@@ -500,9 +513,9 @@
             </div>
 
             <!-- Modal para Estudiantes -->
-            <div x-show="openTab3" class="panel-custom animated fadeIn" style="border-radius: 0 0 10px 10px">
+            <div x-show="openTab3" class="panel-custom" style="border-radius: 0 0 10px 10px;border-top: none;padding-top:20px" x-transition.duration.100ms>
                 
-                <div class="modern-container-header">
+                <div class="modern-container-header" style="margin:0;">
                     <div class="modern-header">
                         <span class="text-center color-title">{{ __('Nuevo Estudiante') }}</span>
                     </div>
@@ -664,7 +677,7 @@
                                         style="@error('organizationStudent') color:#e90326; @enderror">Organización</label>
                                     <div class="input-group mar-btm">
                                         <label class="input-group-addon" for="organizationStudent"><i class="fa-solid fa-users"></i></label>
-                                        <input type="organization" class="form-control" id="organizationStudent" value="{{ old('organizationStudent') }}" wire:model.live='organizationStudent' placeholder="Ingrese la contraseña" autocomplete="off" required style="z-index:0">
+                                        <input type="organization" class="form-control" id="organizationStudent" value="{{ old('organizationStudent') }}" wire:model.live='organizationStudent' placeholder="Ingrese la organizacion" autocomplete="off" required style="z-index:0">
                                     </div>
                                     @error('organizationStudent')
                                         <div class="alert-error animated shake">{{ $message }}</div>
@@ -882,7 +895,7 @@
     </div>
 
     <!-- Buscador y Tabla -->
-    <div class="panel-custom animated zoomIn" style=' margin: 20px 0;padding:10px'>
+    <div class="panel-custom animated fadeIn" style=' margin: 20px 0;padding:10px'>
 
         <div class="modern-container-header" style="justify-content:space-around; flex-wrap:wrap; gap:15px">
             <div class="modern-header" style="margin-bottom:5px;">
@@ -996,7 +1009,7 @@
                             <td>
                                 <div class="dojo-actions-ultimate" style="margin: auto 0">
                                     <button class="edit-btn-ultimate edit-btn-ultimate-table" type="button" wire:click='sendSearchUser("{{ $user->email }}", "{{$user->role}}")'>
-                                        <i class="fa-solid fa-eye"></i>
+                                        <i class="fa-solid fa-eye"></i> Ver Más
                                     </button>
                                 </div>
                             </td>
