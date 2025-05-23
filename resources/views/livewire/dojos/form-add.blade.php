@@ -1,5 +1,11 @@
 <div x-data="{open: false}" x-cloak>
-
+    @push('styles')
+        <style>
+            a:hover{
+                color: white;
+            }
+        </style>
+    @endpush
     <!-- Modal para editar -->
     @if ($modal)
         <div wire:key="edit-modal">
@@ -8,7 +14,7 @@
                 wire:click.self="closeEditAnimation"
                 style="@if ($closeAnimation) background:none; @endif">
                 <div class="modal-container animated fadeInDown">
-                    <button class="close-btn-image" wire:click="closeEditAnimation">&times;</button>
+                    <div class="close-btn-image" wire:click="closeEditAnimation">&times;</div>
                     <div class="modern-container-header">
                         <div class="modern-header">
                             <span class="text-center color-title">{{ __('Editar Dojo') }}</span>
@@ -133,15 +139,15 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12" style="display: flex; justify-content: end; gap:10px; ">
-                                    <button class="cancel-btn-ultimate" type="button"
+                                    <a class="cancel-btn-ultimate" 
                                         wire:click="closeEditAnimation">
                                         <i class="fa-solid fa-xmark"></i>
                                         <span>Cancelar</span>
-                                    </button>
-                                    <button class="modern-btn-success" type="submit">
+                                    </a>
+                                    <a class="modern-btn-success" type="submit">
                                         <i class="fa-solid fa-check"></i>
                                         <span>Guardar</span>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -436,7 +442,7 @@
         <!-- Table con los Dojos -->
         @if($tableDojos)
             <div class="table-container" style="margin:0 10px 10px 10px">
-                <table class="glass-table animated zoomIn">
+                <table class="glass-table animated zoomIn" style="min-width: 750px;">
                     <thead>
                         <tr>
                             <th>
@@ -458,7 +464,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th colspan="2">Sensei</th>
+                            <th>Sensei</th>
                             <th>Descripción</th>
                             <th>Acciones</th>
                         </tr>
@@ -482,25 +488,29 @@
                                 </td>
                                 <td>{{ $dojo->name }}</td>
                                 <td>{{ $dojo->location }}</td>
+                                
                                 @if($dojo->sensei)
-                                    <td>
+                                    <td style="display:flex; gap: 10px; align-items:center">
                                         @if ($dojo->sensei->photo)
                                             <div class="dojo-photo">
                                                 <img src="{{ asset('storage/' . $dojo->sensei->photo) }}" alt="{{ $dojo->sensei->name }}"
                                                     class="dojo-image">
+                                            </div>
+                                            <div>
+                                                <span>{{$dojo->sensei->name ?? 'sin sensei'}}</span>
                                             </div>
                                         @else
                                             <div class="dojo-photo">
                                                 <img src="{{ asset('image/sensei-default.jpg') }}" class="dojo-image"
                                                     alt="dojo-image">
                                             </div>
+                                            <div>
+                                                <span>{{$dojo->sensei->name ?? 'sin sensei'}}</span>
+                                            </div>
                                         @endif
                                     </td>
-                                    <td>{{$dojo->sensei->name ?? 'sin sensei'}}</td>
-
                                 @else
                                     <td>No tiene un Sensei Asignado</td>
-                                    <td></td>
                                 @endif
                                 <td class="description-cell">
                                     {{ Str::limit($dojo->description, 50) }}
@@ -508,10 +518,10 @@
                                 <td>
                                     <div class="dojo-actions-ultimate">
                                         <button wire:click='edit({{ $dojo->id }})' class="edit-btn-ultimate edit-btn-ultimate-table">
-                                            <i class="fa-solid fa-pen"></i>
+                                            <i class="fa-solid fa-pen"></i> Editar
                                         </button>
                                         <button wire:click='destroyModal({{ $dojo->id }})' class="delete-btn-ultimate delete-btn-ultimate-table">
-                                            <i class="fa-solid fa-trash"></i>
+                                            <i class="fa-solid fa-trash"></i> Eliminar
                                         </button>
                                     </div>
                                 </td>
@@ -583,7 +593,7 @@
             class="modal-overlay @if ($closeAnimation) animated zoomOut @endif"
             wire:click.self="closeDestroyModal" style="@if ($closeAnimation) background:none; @endif">
             <div class="modal-container animated fadeIn " @click.stop style="max-width:500px">
-                <button class="close-btn-image" wire:click="closeDestroyModal">&times;</button>
+                <div class="close-btn-image" wire:click="closeDestroyModal">&times;</div>
                 <div class="modern-container-header">
                     <div class="modern-header">
                         <i class="fa-solid fa-triangle-exclamation fa-beat"
@@ -597,15 +607,15 @@
                         {{ $message }}</h3>
                     <div class="row" style="margin-top:20px">
                         <div class="col-sm-12" style="display: flex; justify-content: center; gap:10px;">
-                            <button class="cancel-btn-ultimate" type="button" wire:click="closeDestroyModal">
+                            <a class="cancel-btn-ultimate" wire:click="closeDestroyModal">
                                 <i style="font-size:17px" class="fa-solid fa-xmark"></i>
                                 <span style="font-size:17px">Cancelar</span>
-                            </button>
-                            <button class="delete-btn-ultimate" type="submit"
+                            </a>
+                            <a class="delete-btn-ultimate" type="submit"
                                 wire:click='destroy({{ $id_selected }})'>
                                 <i class="fa-solid fa-trash" style="font-size:17px"></i>
                                 <span style="font-size:17px">Eliminar</span>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

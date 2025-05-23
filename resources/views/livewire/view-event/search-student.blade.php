@@ -44,7 +44,7 @@
     </div>
 
     <!-- Student -->
-    <div class="student-section">
+    <div class="students-section">
         @if($students->count() == 0)
             <div class="no-results-alert">
                 <div class="alert-icon">
@@ -66,8 +66,13 @@
                 <div>
                     <h3>{{$student->name}}</h3>
                     <p><i class="fa-solid fa-ribbon"></i> {{$student->kyu}} • <i class="fas fa-cake-candles"></i> {{ \Carbon\Carbon::parse($student->date_of_birth)->age }} años</p>
-                    <p class="sensei-name" style="margin-top: 3px"><i class="fa-solid fa-vihara"></i> {{$student->dojo->name}}</p>
-                    <p class="sensei-name" style="margin-top: 3px"><i class="fa-solid fa-user-ninja"></i> {{$student->sensei->name}}</p>
+                    <p class="sensei-name" style="margin-top: 3px"><i class="fa-solid fa-vihara"></i> {{$student->dojo->name ?? 'no tiene dojo asignado'}}</p>
+
+                    @if($student->sensei)
+                        <p class="sensei-name" style="margin-top: 3px"><i class="fa-solid fa-user-ninja"></i> {{$student->sensei->name}}</p>
+                    @else
+                        <p class="sensei-name" style="margin-top: 3px"><i class="fa-solid fa-exclamation-circle"></i> Este Atleta se encuentra Inactivo</p>
+                    @endif
                 </div>
             </div>
         @endforeach

@@ -253,7 +253,7 @@
                     <div class="modern-header">
                         <i class="fa-solid fa-triangle-exclamation fa-beat"
                             style="font-size: 1.8rem; color: #ac2b2b; margin-bottom: 15px; font-size:50px; display:block"></i>
-                        <span class="text-center color-title">{{ __('Eliminar Dojo') }}</span>
+                        <span class="text-center color-title">{{ __('Eliminar Administrador') }}</span>
                     </div>
                 </div>
 

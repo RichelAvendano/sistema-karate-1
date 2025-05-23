@@ -352,7 +352,7 @@
                 font-weight: 700;
                 color: #2a3f5f;
                 margin-bottom: 10px;
-                font-size: 1.5rem;
+                font-size: 1.8rem;
                 letter-spacing: 0.5px;
             }
 
@@ -372,7 +372,6 @@
 
             .class-time {
                 color: #4a5568;
-                font-size: 1.3rem;
                 font-weight: 500;
             }
 
@@ -387,7 +386,7 @@
             .rest-day .class-time {
                 color: #805ad5;
                 font-style: italic;
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
 
             .weekend {
@@ -423,11 +422,11 @@
                 }
                 
                 .day-name {
-                    font-size: 1.3rem;
+                    font-size: 1.5rem;
                 }
                 
                 .class-time {
-                    font-size: 1.15rem;
+                    font-size: 1.3rem;
                 }
             }
 
@@ -473,59 +472,59 @@
         </style>
 
         <style>
-        .time-picker-glass {
-            background: linear-gradient(135deg, rgba(100, 150, 255, 0.2), rgba(255, 100, 150, 0.2));
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 20px 0;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            max-width: 400px;
-        }
-        
-        .time-input-group {
-            margin-bottom: 25px;
-        }
-        
-        .time-label {
-            display: block;
-            color: #2a3f5f;
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-        
-        .time-input {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(100, 150, 255, 0.5);
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-            color: #2a3f5f;
-            transition: all 0.3s;
-        }
-        
-        .time-input:focus {
-            outline: none;
-            border-color: rgba(255, 100, 150, 0.8);
-            box-shadow: 0 0 0 2px rgba(255, 100, 150, 0.2);
-        }
-        
-        .time-display {
-            margin-top: 10px;
-            font-size: 1rem;
-            color: #4a5568;
-            font-style: italic;
-        }
-        
-        .error-message {
-            color: #e53e3e;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            font-weight: 500;
-        }
+            .time-picker-glass {
+                background: linear-gradient(135deg, rgba(100, 150, 255, 0.2), rgba(255, 100, 150, 0.2));
+                backdrop-filter: blur(12px);
+                border-radius: 20px;
+                padding: 25px;
+                margin: 20px 0;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                max-width: 400px;
+            }
+            
+            .time-input-group {
+                margin-bottom: 25px;
+            }
+            
+            .time-label {
+                display: block;
+                color: #2a3f5f;
+                font-weight: 600;
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+            }
+            
+            .time-input {
+                width: 100%;
+                padding: 12px 15px;
+                border-radius: 10px;
+                border: 1px solid rgba(100, 150, 255, 0.5);
+                background: rgba(255, 255, 255, 0.9);
+                font-size: 1rem;
+                color: #2a3f5f;
+                transition: all 0.3s;
+            }
+            
+            .time-input:focus {
+                outline: none;
+                border-color: rgba(255, 100, 150, 0.8);
+                box-shadow: 0 0 0 2px rgba(255, 100, 150, 0.2);
+            }
+            
+            .time-display {
+                margin-top: 10px;
+                font-size: 1rem;
+                color: #4a5568;
+                font-style: italic;
+            }
+            
+            .error-message {
+                color: #e53e3e;
+                font-size: 0.9rem;
+                margin-top: 10px;
+                font-weight: 500;
+            }
         </style>
     @endpush
     <!-- Titulo de la Pagina -->
@@ -700,11 +699,11 @@
                                                     </div>
                                                     @if($user->role == "administrador" || $user->role == "sensei")
                                                         <div style="display: flex; gap:5px; justify-content:center; margin-top:5px">
-                                                            <button class="edit-btn-ultimate edit-btn-ultimate-table" style="font-size: 12px;background: linear-gradient(135deg, #219ebc61, #0230473d);" wire:click='editModalSchedule({{$schedule->id}}, {{$dojo->id}})' @click="openModalEdit = !openModalEdit">
-                                                                <i class="fa-solid fa-pen"></i>
+                                                            <button class="edit-btn-ultimate edit-btn-ultimate-table" style="font-size: 12px;background: linear-gradient(135deg, #219ebc61, #0230473d);padding: 7px 10px" wire:click='editModalSchedule({{$schedule->id}}, {{$dojo->id}})' @click="openModalEdit = !openModalEdit">
+                                                                <i class="fa-solid fa-pen"></i> Editar
                                                             </button>
-                                                            <button class="delete-btn-ultimate delete-btn-ultimate-table" style="font-size: 12px;" wire:click='removeScheduleModal("removeSchedule",{{$schedule->id}})' @click="openConfirm1 = !openConfirm1">
-                                                                <i class="fa-solid fa-trash"></i>
+                                                            <button class="delete-btn-ultimate delete-btn-ultimate-table" style="font-size: 12px;padding: 7px 10px" wire:click='removeScheduleModal("removeSchedule",{{$schedule->id}})' @click="openConfirm1 = !openConfirm1">
+                                                                <i class="fa-solid fa-trash"></i> Eliminar
                                                             </button>
                                                         </div>
                                                     @endif
@@ -816,7 +815,7 @@
             <button class="close-btn-image" @click="openStudent = !openStudent">&times;</button>
             <div class="modern-container-header" style="justify-content:space-around; flex-wrap:wrap; gap:15px; margin-bottom:20px">
                 <div class="modern-header">
-                    <span class="text-center color-title">{{ __('Alumnos del Sensei') }}</span>
+                    <span class="text-center color-title">{{ __('Estudiantes Disponibles') }}</span>
                     <span class="text-center color-paragraph"
                         style="margin:0px;">{{ __('Agrega o Eliminas estudiantes de un Sensei') }}</span>
                 </div>             
@@ -1040,7 +1039,7 @@
                 <div class="modern-header">
                     <span class="text-center color-title">{{ __('Horarios del Dojo') }}</span>
                     <span class="text-center color-paragraph"
-                        style="margin:0px;">{{ __('Edita el Horario') }}</span>
+                        style="margin:0px;">{{ __('Crea un Horario al dojo') }}</span>
                 </div>
             </div>
             <div class="panel-body">

@@ -66,7 +66,11 @@
                 <div>
                     <h3> {{$sensei->name}}</h3>
                     <p><i class="fa-solid fa-ribbon"></i> {{$sensei->dan}} • <i class="fas fa-cake-candles"></i> {{ \Carbon\Carbon::parse($sensei->date_of_birth)->age }} años</p>
-                    <p class="dojo-name" style="margin-top: 3px"><i class="fa-solid fa-vihara"></i> {{$sensei->dojo->name}}</p>
+                    @if($sensei->dojo)
+                        <p class="dojo-name" style="margin-top: 3px"><i class="fa-solid fa-vihara"></i> {{$sensei->dojo->name}}</p>
+                    @else
+                        <p class="dojo-name" style="margin-top: 3px"><i class="fa-solid fa-exclamation-circle"></i> Este Sensei se encuentra Inactivo</p>
+                    @endif
                 </div>
             </div>
         @endforeach

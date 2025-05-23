@@ -420,7 +420,7 @@
             <div class="table-controls">
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass" style="color:#002569"></i>
-                    <input wire:model.live="searchDojo" type="text" placeholder="Buscar Alumnos..." class="search-input">
+                    <input wire:model.live="searchDojo" type="text" placeholder="Buscar Dojos..." class="search-input">
                 </div>
 
                 <!-- Select -->
@@ -610,7 +610,7 @@
             <div class="table-controls">
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass" style="color:#002569"></i>
-                    <input wire:model.live="searchSensei" type="text" placeholder="Buscar Alumnos..." class="search-input">
+                    <input wire:model.live="searchSensei" type="text" placeholder="Buscar Senseis..." class="search-input">
                 </div>
 
                 <!-- Select -->
@@ -676,8 +676,12 @@
                                     
                                     <h4 class="dojo-title-ultimate">{{ $sensei->name }}</h4>
                                     <div class="" style="font-size:13px"><i class="fa-solid fa-ribbon"></i> {{ $sensei->dan }}</div>
-                                    <div class="" style="font-size:13px"><i class="fa-solid fa-user-ninja"></i> Dojo: {{$sensei->dojo->name}}</div>
-                                    <div class="" style="font-size:13px"><i class="fa-solid fa-users"></i> Alumnos: {{$sensei->student->count()}}</div>
+                                    @if($sensei->dojo)
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-user-vihara"></i> Dojo: {{$sensei->dojo->name}}</div>
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-users"></i> Alumnos: {{$sensei->student->count()}}</div>
+                                    @else
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-exclamation-circle"></i> Este sensei se encuentra Inactivo</div>
+                                    @endif
                                 </div>  
                             </div>
                         </div>
@@ -735,8 +739,13 @@
                                     
                                     <h4 class="dojo-title-ultimate">{{ $sensei->name }}</h4>
                                     <div class="" style="font-size:13px"><i class="fa-solid fa-ribbon"></i> {{ $sensei->dan }}</div>
-                                    <div class="" style="font-size:13px"><i class="fa-solid fa-user-ninja"></i> Dojo: {{$sensei->dojo->name}}</div>
-                                    <div class="" style="font-size:13px"><i class="fa-solid fa-users"></i> Alumnos: {{$sensei->student->count()}}</div>
+                                    @if($sensei->dojo)
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-user-vihara"></i> Dojo: {{$sensei->dojo->name}}</div>
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-users"></i> Alumnos: {{$sensei->student->count()}}</div>
+                                    @else
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-exclamation-circle"></i> Este sensei se encuentra Inactivo</div>
+                                    @endif
+
                                 </div>  
                             </div>
                         </div>
@@ -866,7 +875,13 @@
                                     
                                     <h4 class="dojo-title-ultimate">{{ $student->name }}</h4>
                                     <div class="" style="font-size:13px"><i class="fa-solid fa-ribbon"></i> {{ $student->kyu }}</div>
-                                    <div class="" style="font-size:13px"><i class="fa-solid fa-user-ninja"></i> Dojo: {{$student->dojo->name}}</div>
+
+                                    @if($student->dojo_id)
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-user-vihara"></i> Dojo: {{$student->dojo->name}}</div>
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-user-ninja"></i> Sensei: {{$student->sensei->name ?? 'no tiene sensei asignado'}}</div>
+                                    @else
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-exclamation-circle"></i> Este estudiante se encuentra Inactivo</div>
+                                    @endif
                                 </div>  
                             </div>
                         </div>
@@ -924,7 +939,12 @@
                                     
                                     <h4 class="dojo-title-ultimate">{{ $student->name }}</h4>
                                     <div class="" style="font-size:13px"><i class="fa-solid fa-ribbon"></i> {{ $student->kyu }}</div>
-                                    <div class="" style="font-size:13px"><i class="fa-solid fa-user-ninja"></i> Dojo: {{$student->dojo->name}}</div>
+                                    @if($student->dojo_id)
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-user-vihara"></i> Dojo: {{$student->dojo->name}}</div>
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-user-ninja"></i> Sensei: {{$student->sensei->name ?? 'no tiene sensei asignado'}}</div>
+                                    @else
+                                        <div class="" style="font-size:13px"><i class="fa-solid fa-exclamation-circle"></i> Este estudiante se encuentra Inactivo</div>
+                                    @endif
                                 </div>  
                             </div>
                         </div>

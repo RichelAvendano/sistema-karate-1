@@ -124,7 +124,6 @@ class ComponentAdminEvent extends Component
         $senseisActive = Sensei::query()
             ->with('dojo')
             ->with('student')
-            ->whereHas('dojo')
             ->whereDoesntHave('event', function ($query) {
                 $query->where('events.id', $this->id_event); // Excluye dojos con este evento
             })
@@ -141,7 +140,6 @@ class ComponentAdminEvent extends Component
         $senseisInactive = Sensei::query()
             ->with('dojo')
             ->with('student')
-            ->whereHas('dojo')
             ->whereHas('event', function ($query) {
                 $query->where('events.id', $this->id_event); // Excluye dojos con este evento
             })
@@ -157,7 +155,6 @@ class ComponentAdminEvent extends Component
         /* Query Senseis */
         $studentsQuery = Student::query()
             ->with(['dojo', 'sensei'])
-            ->whereHas('dojo')
             ->whereDoesntHave('event', function ($query) {
                 $query->where('events.id', $this->id_event); // Excluye dojos con este evento
             })
@@ -179,7 +176,6 @@ class ComponentAdminEvent extends Component
        
         $studentsInactiveQuery = Student::query()
             ->with(['dojo', 'sensei']) // Cargar relaciones
-            ->whereHas('dojo')
             ->whereHas('event', function ($query) {
                 $query->where('events.id', $this->id_event); // Filtrar solo dojos con este evento
             })

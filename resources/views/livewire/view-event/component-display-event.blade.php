@@ -176,10 +176,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .dojo-card:hover, .sensei-card:hover, .student-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
+        
         
         .dojo-image {
             width: 100%;
@@ -193,7 +190,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            object-fit: contain;
+            object-fit: cover;
             border: 2px solid rgba(255, 255, 255, 0.3);
             float: left;
             margin-right: 15px;
@@ -524,14 +521,18 @@
                                     <span style="background: linear-gradient(135deg, rgb(59 130 246 / 59%), rgb(220 38 38 / 60%));color: #fff;font-size: 1.2rem;padding:2px 5px"><i class="fa-solid fa-user-graduate"></i> Estas participando</span>
                                 @endif
                             @endif
-                            @if($user->student->dojo->event)
-                                @if($user->student->dojo->event->contains('id', $event->id))
-                                    <span style="background: linear-gradient(135deg, rgb(59 130 246 / 59%), rgb(220 38 38 / 60%));color: #fff;font-size: 1.2rem;padding:2px 5px"><i class="fa-solid fa-vihara"></i> Tu Dojo esta participando</span>
+                            @if($user->student->dojo)
+                                @if($user->student->dojo->event)
+                                    @if($user->student->dojo->event->contains('id', $event->id))
+                                        <span style="background: linear-gradient(135deg, rgb(59 130 246 / 59%), rgb(220 38 38 / 60%));color: #fff;font-size: 1.2rem;padding:2px 5px"><i class="fa-solid fa-vihara"></i> Tu Dojo esta participando</span>
+                                    @endif
                                 @endif
                             @endif
-                            @if($user->student->sensei->event)
-                                @if($user->student->sensei->event->contains('id', $event->id))
-                                    <span style="background: linear-gradient(135deg, rgb(59 130 246 / 59%), rgb(220 38 38 / 60%));color: #fff;font-size: 1.2rem;padding:2px 5px"><i class="fa-solid fa-user-ninja"></i> Tu sensei esta Participando</span>
+                            @if($user->student->sensei)
+                                @if($user->student->sensei->event)
+                                    @if($user->student->sensei->event->contains('id', $event->id))
+                                        <span style="background: linear-gradient(135deg, rgb(59 130 246 / 59%), rgb(220 38 38 / 60%));color: #fff;font-size: 1.2rem;padding:2px 5px"><i class="fa-solid fa-user-ninja"></i> Tu sensei esta Participando</span>
+                                    @endif
                                 @endif
                             @endif
                         @endif
